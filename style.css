@@ -1,0 +1,324 @@
+/*
+Theme Name: Okal — Million Dollar Journey
+Theme URI: https://www.iamokal.com
+Author: MillionDollar Ideas Ltd
+Author URI: https://www.milliondollarideasltd.com
+Description: Official custom WordPress theme for Okal, "The Million Dollar Girl." Built around the Music, About, Vision, Media, Journey and Connect pages from the site brief. Editable content (text, images, releases, journal entries, press items, milestones, streaming links, social links) is managed entirely from wp-admin — no code required.
+Version: 1.0.0
+Requires at least: 6.4
+Requires PHP: 7.4
+Text Domain: okal
+*/
+
+:root{
+  --bg:#F6EFE1;
+  --bg-soft:#ECE1CC;
+  --frame-1:#2f251d;
+  --frame-2:#4a1a1f;
+  --fg:#221B12;
+  --fg-dim:#6B5D48;
+  --brass:#A9791F;
+  --brass-bright:#8f6519;
+  --wine:#7a2530;
+  --onaccent:#1C150D;
+  --onwine:#F5EFE1;
+  --line: rgba(34,27,18,0.14);
+  --font-display: 'Fraunces', serif;
+  --font-body: 'Sora', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+  --maxw: 1180px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0; background:var(--bg); color:var(--fg);
+  font-family:var(--font-body); font-weight:400; line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%; display:block; height:auto;}
+a{color:inherit;}
+h1,h2,h3,h4{font-family:var(--font-display); font-weight:600; margin:0 0 0.4em; letter-spacing:-0.01em;}
+p{margin:0 0 1em;}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 32px;}
+section, .section{position:relative; padding:120px 0; border-bottom:1px solid var(--line);}
+.eyebrow{
+  font-family:var(--font-mono); font-size:12px; letter-spacing:0.18em; text-transform:uppercase;
+  color:var(--brass); display:flex; align-items:center; gap:12px; margin-bottom:28px;
+}
+.eyebrow::before{content:""; width:26px; height:1px; background:var(--brass);}
+.btn{
+  display:inline-flex; align-items:center; gap:10px; font-family:var(--font-body); font-weight:600;
+  font-size:14px; letter-spacing:0.02em; padding:15px 26px; border-radius:2px; text-decoration:none;
+  cursor:pointer; border:1px solid transparent; transition: all .25s ease;
+}
+.btn-primary{ background:var(--brass); color:var(--onaccent); }
+.btn-primary:hover{ background:var(--brass-bright); transform:translateY(-1px); }
+.btn-outline{ border-color: var(--fg-dim); color:var(--fg); background:transparent; }
+.btn-outline:hover{ border-color:var(--brass); color:var(--brass); }
+.btn-row{display:flex; flex-wrap:wrap; gap:14px; margin-top:34px;}
+
+/* ---------- Verse side nav ---------- */
+#versenav{
+  position:fixed; right:28px; top:50%; transform:translateY(-50%); z-index:60;
+  display:flex; flex-direction:column; gap:18px;
+}
+#versenav a{
+  width:10px; height:10px; border-radius:50%; background:rgba(34,27,18,0.2);
+  position:relative; transition:background .3s ease; display:block;
+}
+#versenav a.active{ background:var(--brass); }
+#versenav a::after{
+  content:attr(data-label); position:absolute; right:22px; top:50%; transform:translateY(-50%);
+  font-family:var(--font-mono); font-size:11px; letter-spacing:0.1em; white-space:nowrap;
+  color:var(--fg); opacity:0; pointer-events:none; transition:opacity .2s ease;
+}
+#versenav a:hover::after{ opacity:0.85; }
+@media (max-width: 860px){ #versenav{ display:none; } }
+
+/* ---------- Top bar ---------- */
+#topbar{
+  position:fixed; top:0; left:0; right:0; z-index:70;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:20px 32px; backdrop-filter:blur(6px); background:rgba(246,239,225,0.85);
+  border-bottom:1px solid var(--line);
+}
+.wordmark{ font-family:var(--font-display); font-size:20px; font-weight:600; letter-spacing:0.02em; text-decoration:none; }
+.wordmark span{ color:var(--brass); }
+#topbar nav{ display:flex; gap:26px; font-size:13px; letter-spacing:0.04em; }
+#topbar nav ul{ list-style:none; display:flex; gap:26px; margin:0; padding:0; }
+#topbar nav a{ text-decoration:none; opacity:0.75; transition:opacity .2s; }
+#topbar nav a:hover{ opacity:1; color:var(--brass); }
+#menuToggle{ display:none; background:none; border:none; color:var(--fg); font-size:22px; cursor:pointer; }
+@media (max-width: 780px){
+  #topbar nav{ display:none; }
+  #menuToggle{ display:block; }
+}
+#mobileMenu{
+  position:fixed; inset:0; background:var(--bg); z-index:90; display:none;
+  flex-direction:column; align-items:center; justify-content:center; gap:26px;
+}
+#mobileMenu ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:26px; align-items:center; }
+#mobileMenu a{ font-family:var(--font-display); font-size:26px; text-decoration:none; }
+#mobileMenu.open{ display:flex; }
+#closeMenu{ position:absolute; top:26px; right:32px; background:none; border:none; color:var(--fg); font-size:26px; }
+
+/* ---------- Announcement banner ---------- */
+#announce{
+  background:var(--brass); color:var(--onaccent); font-family:var(--font-mono); font-size:12.5px;
+  letter-spacing:0.05em; text-align:center; padding:9px 40px; position:relative;
+}
+#announce button{ position:absolute; right:14px; top:50%; transform:translateY(-50%); background:none; border:none; color:var(--onaccent); cursor:pointer; font-size:14px; }
+
+/* ---------- Hero ---------- */
+#home-hero{ padding-top:220px; min-height:100vh; display:flex; align-items:center; }
+.hero-grid{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:70px; align-items:center; }
+@media (max-width:900px){ .hero-grid{ grid-template-columns:1fr; } }
+.hero h1{ font-size:clamp(38px, 6vw, 68px); line-height:1.02; }
+.hero .tag{ font-family:var(--font-mono); color:var(--brass); font-size:13px; letter-spacing:.14em; text-transform:uppercase; margin-bottom:18px; }
+.hero p.lede{ font-size:18px; color:var(--fg-dim); max-width:52ch; }
+
+.photo-slot{
+  aspect-ratio:4/5; border-radius:3px; position:relative; overflow:hidden;
+  border:1px solid var(--line);
+  background:
+    radial-gradient(circle at 30% 20%, rgba(200,155,60,0.35), transparent 55%),
+    repeating-linear-gradient(115deg, rgba(242,233,220,0.06) 0 2px, transparent 2px 26px),
+    linear-gradient(155deg, var(--frame-1), var(--frame-2));
+  display:flex; align-items:flex-end; justify-content:flex-start;
+}
+.photo-slot img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.photo-slot .ph-label{
+  position:relative; z-index:2; font-family:var(--font-mono); font-size:11px; letter-spacing:.08em;
+  color:rgba(245,239,225,0.65); padding:16px; text-transform:uppercase;
+}
+.photo-slot.small{ aspect-ratio:1/1; }
+.photo-slot.wide{ aspect-ratio:16/10; }
+
+/* ---------- Section heading ---------- */
+.sec-head{ display:flex; justify-content:space-between; align-items:flex-end; gap:40px; margin-bottom:60px; flex-wrap:wrap; }
+.sec-head h2{ font-size:clamp(28px,4vw,44px); max-width:16ch; }
+.sec-head .num{ font-family:var(--font-mono); font-size:13px; color:var(--fg-dim); }
+
+/* ---------- About / two col ---------- */
+.twocol{ display:grid; grid-template-columns:0.85fr 1.15fr; gap:70px; align-items:start; }
+@media (max-width:900px){ .twocol{ grid-template-columns:1fr; } }
+.quote-block{
+  border-left:2px solid var(--brass); padding:6px 0 6px 22px; font-family:var(--font-display);
+  font-style:italic; font-size:20px; color:var(--fg); margin:34px 0;
+}
+.prose p{ color:var(--fg); }
+
+/* ---------- Timeline ---------- */
+.timeline{ position:relative; margin-top:20px; padding-left:32px; border-left:1px solid var(--line); }
+.t-item{ position:relative; padding-bottom:38px; }
+.t-item:last-child{ padding-bottom:0; }
+.t-item::before{ content:""; position:absolute; left:-38px; top:4px; width:10px; height:10px; border-radius:50%; background:var(--brass); }
+.t-year{ font-family:var(--font-mono); font-size:13px; color:var(--brass); margin-bottom:4px; letter-spacing:.05em; }
+.t-desc{ color:var(--fg-dim); font-size:15px; }
+
+/* ---------- Release / card grids ---------- */
+.rel-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+@media (max-width:900px){ .rel-grid{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:620px){ .rel-grid{ grid-template-columns:1fr; } }
+.rel-card{ background:var(--bg-soft); border:1px solid var(--line); border-radius:3px; overflow:hidden; transition:transform .25s ease, border-color .25s ease; text-decoration:none; color:inherit; display:block; }
+.rel-card:hover{ transform:translateY(-4px); border-color:var(--brass); }
+.rel-card .cover{ aspect-ratio:1/1; border-radius:0; border:none; }
+.rel-body{ padding:20px 22px 24px; }
+.rel-body .yr{ font-family:var(--font-mono); font-size:11px; color:var(--brass); letter-spacing:.08em; }
+.rel-body h4{ font-size:19px; margin:8px 0 8px; }
+.rel-body p{ font-size:14px; color:var(--fg-dim); margin-bottom:14px; }
+.platform-row{ display:flex; flex-wrap:wrap; gap:8px; margin-top:36px; }
+.plat-chip{ font-family:var(--font-mono); font-size:11.5px; letter-spacing:.05em; padding:9px 14px; border:1px solid var(--line); border-radius:20px; color:var(--fg-dim); text-decoration:none; }
+.plat-chip.featured{ border-color:var(--brass); color:var(--brass); }
+
+/* ---------- Vision pillars ---------- */
+.pillars{ display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--line); margin-top:10px; }
+@media (max-width:800px){ .pillars{ grid-template-columns:1fr; } }
+.pillar{ background:var(--bg); padding:38px 32px; }
+.pillar .pnum{ font-family:var(--font-mono); color:var(--brass); font-size:13px; margin-bottom:14px; }
+.pillar h4{ font-size:20px; margin-bottom:10px; }
+.pillar p{ font-size:14.5px; color:var(--fg-dim); margin:0; }
+
+/* ---------- Media / press grid ---------- */
+.press-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:22px; margin-top:40px; }
+@media (max-width:900px){ .press-grid{ grid-template-columns:repeat(2,1fr); } }
+.press-item{ text-align:center; padding:26px 14px; border:1px solid var(--line); border-radius:3px; font-family:var(--font-mono); font-size:12px; letter-spacing:.06em; color:var(--fg-dim); text-decoration:none; display:block; }
+.press-item:hover{ border-color:var(--brass); color:var(--brass); }
+
+/* ---------- Journey journal ---------- */
+.journal-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px; }
+@media (max-width:900px){ .journal-grid{ grid-template-columns:1fr; } }
+.journal-card{ border:1px solid var(--line); border-radius:3px; overflow:hidden; text-decoration:none; color:inherit; display:block; }
+.journal-card .thumb{ aspect-ratio:16/10; border-radius:0; border:none; }
+.journal-card .jb{ padding:20px; }
+.journal-card .jdate{ font-family:var(--font-mono); font-size:11px; color:var(--brass); }
+.journal-card h4{ font-size:17px; margin:8px 0; }
+.journal-card p{ font-size:14px; color:var(--fg-dim); margin:0; }
+.lessons{ margin-top:44px; display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+@media (max-width:700px){ .lessons{ grid-template-columns:1fr; } }
+.lesson{ font-family:var(--font-display); font-style:italic; font-size:17px; padding:20px 24px; border:1px solid var(--line); border-radius:3px; color:var(--fg); }
+
+/* ---------- Connect ---------- */
+.contact-grid{ display:grid; grid-template-columns:1fr 1fr; gap:60px; }
+@media (max-width:800px){ .contact-grid{ grid-template-columns:1fr; } }
+.enquiry-cards{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:26px; }
+.enq{ border:1px solid var(--line); padding:16px 18px; border-radius:3px; font-size:14px; color:var(--fg-dim); }
+form.subscribe{ display:flex; gap:10px; margin-top:10px; flex-wrap:wrap; }
+form.subscribe input{
+  flex:1; min-width:200px; background:transparent; border:1px solid var(--fg-dim); color:var(--fg);
+  padding:14px 16px; font-family:var(--font-body); font-size:14px; border-radius:2px;
+}
+form.subscribe input::placeholder{ color:var(--fg-dim); }
+.contact-detail{ margin-bottom:22px; }
+.contact-detail .lbl{ font-family:var(--font-mono); font-size:11px; letter-spacing:.08em; color:var(--brass); text-transform:uppercase; margin-bottom:6px; }
+
+/* ---------- Footer ---------- */
+#colophon{ padding:70px 0 130px; }
+.foot-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:40px; }
+@media (max-width:700px){ .foot-grid{ grid-template-columns:1fr; } }
+#colophon h5{ font-family:var(--font-mono); font-size:12px; letter-spacing:.1em; color:var(--brass); text-transform:uppercase; margin-bottom:16px; }
+#colophon a{ display:block; text-decoration:none; color:var(--fg-dim); font-size:14px; margin-bottom:10px; }
+#colophon a:hover{ color:var(--brass); }
+.fine{ margin-top:60px; font-family:var(--font-mono); font-size:11.5px; color:var(--fg-dim); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+
+/* ---------- Global audio player (mock) ---------- */
+#player{
+  position:fixed; left:24px; bottom:24px; z-index:65; display:flex; align-items:center; gap:14px;
+  background:var(--bg-soft); border:1px solid var(--line); border-radius:40px; padding:10px 20px 10px 10px;
+  box-shadow:0 12px 30px rgba(0,0,0,0.12);
+}
+#playBtn{
+  width:38px; height:38px; border-radius:50%; background:var(--brass); border:none; color:var(--onaccent);
+  font-size:14px; cursor:pointer; display:flex; align-items:center; justify-content:center;
+}
+#player.playing #playBtn{ animation: spin 3s linear infinite; }
+@keyframes spin{ to{ transform:rotate(360deg); } }
+#player .meta{ font-family:var(--font-mono); font-size:11.5px; line-height:1.3; }
+#player .meta .tt{ color:var(--fg); }
+#player .meta .tt2{ color:var(--fg-dim); }
+@media (max-width:700px){ #player .meta{ display:none; } }
+
+/* ---------- WP core alignment helpers ---------- */
+.alignwide{ max-width:1400px; margin-left:auto; margin-right:auto; }
+.alignfull{ width:100vw; margin-left:calc(50% - 50vw); }
+.screen-reader-text{ position:absolute !important; clip:rect(1px,1px,1px,1px); width:1px; height:1px; overflow:hidden; }
+
+/* ================= Music page: artist header (YouTube Music match) ================= */
+.music-hero, .top-songs-wrap{ font-family:'Roboto', 'Sora', sans-serif; }
+.music-hero{
+  position:relative; min-height:640px; display:flex; align-items:flex-end;
+  padding-top:100px; overflow:hidden; background:#0f0f0f;
+}
+.music-hero.no-banner{ min-height:420px; }
+.music-hero-bg{ position:absolute; inset:0; z-index:0; }
+.music-hero-bg img{ width:100%; height:100%; object-fit:cover; object-position:center 20%; }
+.music-hero-scrim{
+  position:absolute; inset:0; z-index:1;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.35) 45%, rgba(15,15,15,0.92) 78%, #0f0f0f 100%);
+}
+.music-hero-inner{ position:relative; z-index:2; padding-bottom:40px; padding-top:220px; max-width:1400px; }
+.music-hero-inner h1{ font-family:'Roboto', sans-serif; font-weight:700; color:#fff; font-size:clamp(30px,5vw,48px); letter-spacing:-0.01em; margin-bottom:8px; }
+.music-hero-audience{ color:#aaaaaa; font-family:'Roboto', sans-serif; font-size:14px; margin-bottom:18px; }
+.music-hero-bio{ max-width:640px; margin-bottom:20px; }
+.music-hero-bio .bio-text{
+  color:#e5e5e5; font-size:14px; line-height:1.5;
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+}
+.music-hero-bio.expanded .bio-text{ -webkit-line-clamp:unset; overflow:visible; }
+.music-hero-bio .bio-text p{ margin:0; }
+.bio-toggle{
+  background:none; border:none; color:#fff; font-family:'Roboto', sans-serif; font-weight:700;
+  font-size:13px; padding:6px 0 0; cursor:pointer; text-transform:none;
+}
+.bio-toggle:hover{ text-decoration:underline; }
+.music-hero-actions{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-top:8px; }
+.pill-btn{
+  display:inline-flex; align-items:center; gap:8px; font-family:'Roboto', sans-serif; font-weight:500;
+  font-size:14px; padding:10px 20px; border-radius:20px; text-decoration:none; cursor:pointer; border:1px solid transparent;
+}
+.pill-primary{ background:#fff; color:#0f0f0f; }
+.pill-primary:hover{ background:#e0e0e0; }
+.pill-outline{ border-color:rgba(255,255,255,0.3); color:#fff; background:transparent; }
+.pill-outline:hover{ background:rgba(255,255,255,0.1); }
+.pill-static{ cursor:default; }
+.pill-btn .ic{ font-size:15px; line-height:1; }
+.hero-kebab{
+  width:38px; height:38px; border-radius:50%; border:none; background:transparent; color:#fff;
+  font-size:18px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center;
+}
+.hero-kebab:hover{ background:rgba(255,255,255,0.1); }
+@media (max-width:700px){
+  .music-hero{ min-height:460px; }
+  .music-hero-inner{ padding-top:140px; }
+}
+
+/* ---------- Top songs list (YouTube Music match) ---------- */
+.top-songs-wrap{ background:#0f0f0f; padding-top:0; }
+.top-songs-wrap .sec-head h2, .top-songs-wrap .eyebrow{ display:none; }
+.top-songs-heading{ font-family:'Roboto', sans-serif; font-weight:700; color:#fff; font-size:22px; margin-bottom:14px; }
+.top-songs{ display:flex; flex-direction:column; }
+.song-row{
+  display:grid; grid-template-columns:48px 2fr 130px 100px 1fr 32px; align-items:center; gap:16px;
+  padding:8px 8px; text-decoration:none; border-radius:4px;
+}
+.song-row:hover{ background:rgba(255,255,255,0.08); }
+.song-row:hover .song-more{ opacity:1; }
+.song-thumb{ width:48px; height:48px; border-radius:3px; overflow:hidden; background:#222; display:block; }
+.song-thumb img{ width:100%; height:100%; object-fit:cover; }
+.song-thumb-ph{ display:block; width:100%; height:100%; background:#222; }
+.song-main{ display:flex; flex-direction:column; gap:2px; min-width:0; }
+.song-title{ font-family:'Roboto', sans-serif; font-weight:500; font-size:14px; color:#fff; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.song-sub{ display:none; font-size:12.5px; color:#aaa; }
+.song-artist-col, .song-plays-col, .song-album-col{ font-family:'Roboto', sans-serif; font-size:13px; color:#aaa; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.song-more{ text-align:right; color:#aaa; font-size:18px; opacity:0; transition:opacity .15s ease; }
+.top-songs-wrap .btn-row{ margin-top:24px; }
+.top-songs-wrap .btn-outline{ border-radius:20px; border-color:rgba(255,255,255,0.3); color:#fff; font-family:'Roboto',sans-serif; }
+.top-songs-wrap .btn-outline:hover{ background:rgba(255,255,255,0.1); border-color:rgba(255,255,255,0.3); color:#fff; }
+@media (max-width:800px){
+  .song-row{ grid-template-columns:44px 1fr 24px; padding:8px 6px; }
+  .song-artist-col, .song-plays-col, .song-album-col{ display:none; }
+  .song-sub{ display:block; }
+  .song-sub .song-plays::before, .song-sub .song-album::before{ content:" · "; }
+  .song-more{ opacity:1; }
+  .song-title{ white-space:normal; }
+}
